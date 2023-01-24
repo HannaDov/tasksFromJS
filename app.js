@@ -1,18 +1,39 @@
-function slidesPlugin(activeSlide=0) {
-    const slides=document.querySelectorAll('.slide')//это массив
+const item=document.querySelector('.item')
+const placeholders=document.querySelectorAll('.placeholder')
 
-    slides[activeSlide].classList.add('active')
-    for (const slide of slides){
-        slide.addEventListener('click', ()=>{
-            clearActiveClasses()
-            slide.classList.add('active')
-        })
-    }
-
-    function clearActiveClasses(){
-        slides.forEach((slide) => {
-            slide.classList.remove('active')
-        });
-    }
+for (const placeholder of placeholders){
+    console.log(placeholder)
+    placeholder.addEventListener('dragover', dragOver)
+    placeholder.addEventListener('dragenter', dragEnter)
+    placeholder.addEventListener('dragleave', dragLeave)
+    placeholder.addEventListener('drop', drop)
 }
-slidesPlugin(4)
+
+item.addEventListener('dragstart',dragStart)
+item.addEventListener('dragend',dragEnd)
+function dragStart(event) {
+    event.target.classList.add('hold')
+    setTimeout(()=>event.target.classList.add('hide'),0)
+}
+function dragEnd(event) {
+    event.target.className ='item'
+}
+
+function dragOver(event) {
+    console.log('over');
+    event.preventDefault()
+}
+function dragEnter(event) {
+    console.log('event');
+    event.target.classList.add('hovered')
+}
+
+function dragLeave(event) {
+    console.log('leave');
+    event.target.classList.remove('hovered')
+}
+
+function drop(event) {
+    event.target.classList.remove('hovered')
+    event.target.append(item)
+}
