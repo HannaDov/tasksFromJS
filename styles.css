@@ -51,47 +51,35 @@ body {
   width: 65%;
   transition: transform 0.5s ease-in-out;
 }
-
-.main-slide > div {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 100%;
-  width: 100%;
+* {
+  box-sizing: border-box;
 }
 
-button {
-  background-color: #fff;
-  border: none;
-  color: #aaa;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 15px;
+body {
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
 }
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+max-width: 500px;
 
-button:hover {
-  color: #222;
 }
-
-button:focus {
-  outline: none;
+.square {
+width: 16px;
+height: 16px;
+background:#1d1d1d ;
+margin:2px;
+box-shadow: 0 0 2px #000;
+transition:1s ease;
 }
-
-.container .controls button {
-  position: absolute;
-  left: 35%;
-  top: 50%;
-  z-index: 100;
-}
-
-.container .controls .down-button {
-  transform: translateX(-100%);
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.container .controls .up-button {
-  transform: translateY(-100%);
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+.square:hover {
+  transition-duration: 0s;
 }
