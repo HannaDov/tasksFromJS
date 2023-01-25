@@ -1,39 +1,30 @@
-const item=document.querySelector('.item')
-const placeholders=document.querySelectorAll('.placeholder')
-
-for (const placeholder of placeholders){
-    console.log(placeholder)
-    placeholder.addEventListener('dragover', dragOver)
-    placeholder.addEventListener('dragenter', dragEnter)
-    placeholder.addEventListener('dragleave', dragLeave)
-    placeholder.addEventListener('drop', drop)
-}
-
-item.addEventListener('dragstart',dragStart)
-item.addEventListener('dragend',dragEnd)
-function dragStart(event) {
-    event.target.classList.add('hold')
-    setTimeout(()=>event.target.classList.add('hide'),0)
-}
-function dragEnd(event) {
-    event.target.className ='item'
-}
-
-function dragOver(event) {
-    console.log('over');
-    event.preventDefault()
-}
-function dragEnter(event) {
-    console.log('event');
-    event.target.classList.add('hovered')
-}
-
-function dragLeave(event) {
-    console.log('leave');
-    event.target.classList.remove('hovered')
-}
-
-function drop(event) {
-    event.target.classList.remove('hovered')
-    event.target.append(item)
+const upButton=document.querySelector('.up-button')
+const downButton=document.querySelector('.down-button')
+const sidebar=document.querySelector('.sidebar')
+const mainSlide=document.querySelector('.main-slide')
+const container=document.querySelector('.container')
+const slidesCount=mainSlide.querySelectorAll('div').length
+let activeSlideIndex=0
+sidebar.style.top=`-${(slidesCount-1)*100}vh`
+upButton.addEventListener('click', ()=>{
+    changeSlide('up')
+})
+downButton.addEventListener('click', ()=>{
+    changeSlide('down')
+})
+function changeSlide(direction) {
+    if (direction==='up'){
+        activeSlideIndex++
+        if(activeSlideIndex ===slidesCount){
+            activeSlideIndex=0
+        }
+    } else if (direction==='down'){
+        activeSlideIndex--
+        if(activeSlideIndex<0){
+            activeSlideIndex=slidesCount-1
+        }
+    }
+    const height = container.clientHeight
+    mainSlide.style.transform = `translateY(-${activeSlideIndex*height}px)`
+    sidebar.style.transform = `translateY(${activeSlideIndex*height}px)`
 }
